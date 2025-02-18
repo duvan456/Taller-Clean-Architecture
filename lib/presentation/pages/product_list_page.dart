@@ -1,10 +1,12 @@
-import '/domain/entities/product.dart';
+import '/domain/entities/car.dart';
+import '/domain/entities/byke.dart';
 import '/presentation/bloc/product_bloc.dart';
 import '/presentation/bloc/product_event.dart';
 import '/presentation/bloc/product_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
+import 'dart:math';
 
 class ProductListPage extends StatelessWidget {
   const ProductListPage({super.key});
@@ -13,7 +15,7 @@ class ProductListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Products'),
+        title: const Text('Vehicles'),
       ),
       body: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
@@ -43,20 +45,44 @@ class ProductListPage extends StatelessWidget {
               },
             );
           }
-          return const Center(child: Text('No products'));
+          return const Center(child: Text('No vehicles'));
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          final product = Product(
-            id: const Uuid().v4(),
-            name: 'New Product ${DateTime.now().millisecondsSinceEpoch}',
-            price: 99.99,
-            description: 'A new product description',
-          );
-          context.read<ProductBloc>().add(AddProduct(product));
-        },
-        child: const Icon(Icons.add),
+      floatingActionButton: Stack(
+        children: [
+          Positioned(
+            bottom: 60,
+            right: 20,
+            child: FloatingActionButton(
+              onPressed: (){
+                final car = Car(
+                  id: const Uuid().v4(),
+                  name: 'Car ${DateTime.now().millisecondsSinceEpoch}',
+                  description: 'Car description',
+                  price: Random().nextDouble()*1000,
+                );
+                context.read<ProductBloc>().add(AddProduct(car));
+              },
+              child: const Icon(Icons.directions_car_filled_rounded),
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: FloatingActionButton(
+              onPressed: (){
+                final byke = Byke(
+                  id: const Uuid().v4(),
+                  name: 'Bike ${DateTime.now().millisecondsSinceEpoch}',
+                  description: 'Bike description',
+                  price: Random().nextDouble()*100,
+                );
+                context.read<ProductBloc>().add(AddProduct(byke));
+              },
+              child: const Icon(Icons.pedal_bike_rounded),
+            )
+          )
+        ],
       ),
     );
   }

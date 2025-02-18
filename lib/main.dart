@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Crear instancias de las dependencias
     final productRepository = ProductRepositoryImpl();
     final getAllProducts = GetAllProducts(productRepository);
     final saveProduct = SaveProduct(productRepository);
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Clean Architecture',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
         useMaterial3: false,
       ),
       home: BlocProvider(
