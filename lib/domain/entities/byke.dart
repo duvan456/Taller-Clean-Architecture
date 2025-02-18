@@ -1,4 +1,4 @@
-class Car {
+class Byke {
   final String id;
   final String name;
   final String description;
@@ -8,7 +8,7 @@ class Car {
   final bool isCar;
   final bool isByke;
 
-  Car({
+  Byke({
     required this.id,
     required this.name,
     required this.description,
@@ -19,7 +19,7 @@ class Car {
     required this.isByke
   });
 
-  Car copyWith({
+  Byke copyWith({
     String? id,
     String? name,
     String? description,
@@ -29,7 +29,7 @@ class Car {
     bool? isCar,
     bool? isByke
   }) {
-    return Car(
+    return Byke(
       id: id ?? this.id,
       name: name ?? this.name,
       description: description ?? this.description,
